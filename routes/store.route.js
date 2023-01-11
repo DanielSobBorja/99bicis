@@ -14,7 +14,7 @@ api.post('/create', storeAPI.createStore);
 
 // -- Put --
 // update bike by id
-//api.put('/:id', storeAPI.updateStore);
+api.put('/:id', storeAPI.updateStore);
 
 // -- Delete --
 // delete bike by id

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const BikeSchema = Schema({
     _id: {
         type: Schema.Types.ObjectId,
-        default: mongoose.Types.ObjectId(),
+        default: () => new mongoose.Types.ObjectId(),
     },
     name: { type: String, required: true },
     spe_level: String,

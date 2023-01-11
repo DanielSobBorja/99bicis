@@ -71,7 +71,6 @@ describe('Bike CRUD', () => {
 
     it('should find a bike by id', async () => {
         const bike = await Bike.create({
-            _id: '63be4aa2e873a9fcc934b930',
             name: 'Road Bike',
             spe_level: 'Level 2',
             category: 'road',

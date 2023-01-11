@@ -30,4 +30,19 @@ describe('Store CRUD', () => {
                 expect(res.statusCode).toBe(200);
             });
     });
+
+    it('should update a store', async () => {
+        const store = await Store.create({
+            name: 'Tiendecita',
+            address: 'Francia',
+        });
+        const updates = { address: 'Palma de Mallorca' };
+        return request(app)
+            .put(`/store/${store._id}`)
+            .send(updates)
+            .then((res) => {
+                expect(res.body.address).toBe(updates.address);
+                expect(res.statusCode).toBe(200);
+            });
+    });
 });
