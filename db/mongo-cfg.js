@@ -1,4 +1,3 @@
-//Set up mongoose connection
 var mongoose = require('mongoose');
 
 var databaseUri = {

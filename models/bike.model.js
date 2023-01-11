@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const BikeSchema = Schema({
-    _id: Schema.Types.ObjectId,
-    name: String,
-    price: Number,
+    _id: { type: Schema.Types.ObjectId, required: true },
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
     spe_level: String,
     category: String,
     weight: Number,

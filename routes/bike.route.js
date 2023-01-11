@@ -4,7 +4,8 @@ var { bikeAPI } = require('../controllers/bike.controller');
 
 // -- Get --
 // get bike by id
-//api.get('/:id', bikeAPI.findById);
+api.get('/:id', bikeAPI.findById);
+// list all bikes
 
 // -- Post --
 // create bike
@@ -16,6 +17,6 @@ api.put('/:id', bikeAPI.updateBike);
 
 // -- Delete --
 // delete bike by id
-//api.delete('/:id', bikeAPI.deleteBike);
+api.delete('/:id', bikeAPI.deleteBike);
 
 module.exports = api;
