@@ -21,9 +21,4 @@ const BikeSchema = Schema({
     brand_site: String,
 });
 
-/*
-BikeSchema.statics.findById = function (id) {
-    return this.findOne({ _id: id });
-};*/
-
 module.exports = mongoose.model('Bike', BikeSchema);

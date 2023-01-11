@@ -37,18 +37,21 @@ describe('Bike CRUD', () => {
                 expect(res.statusCode).toBe(200);
             });
     });
-    /*
+
     it('should update a bike', async () => {
-        const bike = await Bike.findById('5f4899cxxxxx');
-        bike.name = 'Road Bike';
-        bike.price = 1200;
-        await bike.save();
-        expect(bike).toBeDefined();
-        expect(bike.name).toBe('Road Bike');
-        expect(bike.price).toBe(1200);
+        const id = '63be8b19700af502c4e62317';
+
+        return request(app)
+            .put('/bike/' + id)
+            .send({ name: 'New Name', category: 'Road Bike' })
+            .then((res) => {
+                expect(res.body.name).toBe('New Name');
+                expect(res.body.category).toBe('Road Bike');
+                expect(res.statusCode).toBe(200);
+            });
     });
 
-    
+    /*
     it('should delete a bike', async () => {
         await Bike.findByIdAndRemove('5f4899cxxxxx');
         const deletedBike = await Bike.findById('5f4899cxxxxx');
