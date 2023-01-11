@@ -4,7 +4,6 @@ module.exports = [
     {
         _id: ObjectId('63be79920a25c43ffcd60b3b'),
         name: 'Pretty cool bike',
-        price: 1500,
         spe_level: 'Level 3',
         category: 'mtb',
         weight: 13.5,
@@ -23,7 +22,6 @@ module.exports = [
     {
         _id: ObjectId('63be79f2d91493ff8d93ab80'),
         name: 'Less cool bike',
-        price: 300,
         spe_level: 'Level 1',
         category: 'cb',
         weight: 13,
@@ -42,7 +40,6 @@ module.exports = [
     {
         _id: ObjectId('63be7aa2e873a9fcc9345930'),
         name: 'City runner',
-        price: 600,
         spe_level: 'Level 2',
         category: 'cb',
         weight: 13,
@@ -61,7 +58,6 @@ module.exports = [
     {
         _id: ObjectId('63be7ab36260b6af45c49708'),
         name: 'Big chungus',
-        price: 3600,
         spe_level: 'Level 3',
         category: 'mtb',
         weight: 9,

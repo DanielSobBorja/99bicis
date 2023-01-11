@@ -11,8 +11,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const bikeRouter = require('./routes/bike.route');
+const storeRouter = require('./routes/store.route');
 
 app.use('/bike', bikeRouter);
+app.use('/store', storeRouter);
 
 app.use((req, res) => res.status(404).json({ error: 'not found' }));
 

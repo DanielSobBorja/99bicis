@@ -10,11 +10,13 @@ router.use(function (req, res, next) {
 });
 
 // -- Get --
-// get inventories by store id
-// get inventories by bike id
+// list all bikes in a store
+// api.get('/bikes/:id', bikeAPI.listAllBikesInStore);
+// list all stores containing a bike
+// api.get('/stores/:id', bikeAPI.listAllStoresContainingBike);
 
 // -- Post --
-// create inventory by store id and bike id
+// create inventory by store id and bike id, optional stock
 //router.post('/inv', inventoryAPI.createInventory);
 
 // -- Put --

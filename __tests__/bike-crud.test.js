@@ -6,25 +6,9 @@ const Bike = require('../models/bike.model');
 const db = require('../db/mongo-cfg');
 
 describe('Bike CRUD', () => {
-    const bikeExample = {
-        _id: '63be8b19700af502c4e62317',
-        name: 'Mountain Bike',
-        price: 900,
-        spe_level: 'Level 3',
-        category: 'mtb',
-        weight: 12.5,
-        frame: 'Aluminum',
-        fork: 'Suspension',
-        wheels: 'Alloy',
-        wheel_size: '29',
-        brakes: 'Disc',
-        groupset: 'Shimano',
-        drivetrain: '1x10',
-        suspension: 'Air',
-        front_travel: 120,
-        seatpost: 'Dropper',
-        brand_site: 'https://www.examplebrand.com/',
-    };
+    beforeAll(async () => {
+        db.connect();
+    });
 
     afterAll(async () => {
         setTimeout(() => {
@@ -33,6 +17,23 @@ describe('Bike CRUD', () => {
     });
 
     it('should create a bike', async () => {
+        const bikeExample = {
+            name: 'Mountain Bike',
+            spe_level: 'Level 3',
+            category: 'mtb',
+            weight: 12.5,
+            frame: 'Aluminum',
+            fork: 'Suspension',
+            wheels: 'Alloy',
+            wheel_size: '29',
+            brakes: 'Disc',
+            groupset: 'Shimano',
+            drivetrain: '1x10',
+            suspension: 'Air',
+            front_travel: 120,
+            seatpost: 'Dropper',
+            brand_site: 'https://www.examplebrand.com/',
+        };
         return request(app)
             .post('/bike/create')
             .send(bikeExample)
@@ -43,10 +44,10 @@ describe('Bike CRUD', () => {
     });
 
     it('should update a bike', async () => {
-        const id = '63be8b19700af502c4e62317';
+        const id = '63be79920a25c43ffcd60b3b';
 
         return request(app)
-            .put('/bike/' + id)
+            .put(`/bike/${id}`)
             .send({ name: 'New Name', category: 'Road Bike' })
             .then((res) => {
                 expect(res.body.name).toBe('New Name');
@@ -56,15 +57,51 @@ describe('Bike CRUD', () => {
     });
 
     it('should delete a bike', async () => {
-        let id = '63be8b19700af502c4e62317';
+        let id = '63be79920a25c43ffcd60b3b';
 
         return request(app)
-            .delete('/bike/' + id)
+            .delete(`/bike/${id}`)
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 Bike.findById(id).then((deleted_bike) => {
                     expect(deleted_bike).toBeNull();
                 });
+            });
+    });
+
+    it('should find a bike by id', async () => {
+        const bike = await Bike.create({
+            _id: '63be4aa2e873a9fcc934b930',
+            name: 'Road Bike',
+            spe_level: 'Level 2',
+            category: 'road',
+            weight: 9.5,
+            frame: 'Carbon Fiber',
+            fork: 'Carbon Fiber',
+            wheels: 'Carbon Fiber',
+            wheel_size: '28',
+            brakes: 'Rim',
+            groupset: 'Shimano',
+            drivetrain: '2x11',
+            suspension: 'None',
+            front_travel: 0,
+            seatpost: 'Carbon Fiber',
+            brand_site: 'https://www.examplebrand.com/',
+        });
+        return request(app)
+            .get(`/bike/${bike._id}`)
+            .then((res) => {
+                expect(res.body.name).toBe(bike.name);
+                expect(res.statusCode).toBe(200);
+            });
+    });
+
+    it('should list all bikes', async () => {
+        return request(app)
+            .get('/bike/')
+            .then((res) => {
+                expect(res.body.length).toBeGreaterThan(1);
+                expect(res.statusCode).toBe(200);
             });
     });
 });

@@ -6,6 +6,7 @@ var { bikeAPI } = require('../controllers/bike.controller');
 // get bike by id
 api.get('/:id', bikeAPI.findById);
 // list all bikes
+api.get('/', bikeAPI.listAllBikes);
 
 // -- Post --
 // create bike

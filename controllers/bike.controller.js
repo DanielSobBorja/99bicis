@@ -1,8 +1,8 @@
 const Bike = require('../models/bike.model');
 
 var bikeAPI = (function () {
-    const createBike = async function (req, res) {
-        let createdBike = new Bike(req.body);
+    const createBike = async (req, res) => {
+        const createdBike = new Bike(req.body);
 
         const success = await createdBike.save();
         if (success) {
@@ -12,7 +12,7 @@ var bikeAPI = (function () {
         }
     };
 
-    const updateBike = async function (req, res) {
+    const updateBike = async (req, res) => {
         let { id } = req.params;
         let updates = req.body;
 
@@ -28,7 +28,7 @@ var bikeAPI = (function () {
 
     const deleteBike = async (req, res) => {
         try {
-            const deletedBike = await Bike.findByIdAndDelete(req.params.id);
+            let deletedBike = await Bike.findByIdAndDelete(req.params.id);
             if (!deletedBike) {
                 return res.status(404).send({ message: 'Bike not found' });
             }
@@ -38,11 +38,38 @@ var bikeAPI = (function () {
         }
     };
 
+    const findById = async (req, res) => {
+        let { id } = req.params;
+
+        try {
+            let foundBike = await Bike.findById(id);
+            if (!foundBike) {
+                res.status(404).send({ message: 'Bike not found' });
+            } else {
+                res.status(200).json(foundBike);
+            }
+        } catch (error) {
+            res.status(500).send({ message: 'Error finding bike' });
+        }
+    };
+
+    const listAllBikes = async (req, res) => {
+        try {
+            let bikes = await Bike.find({});
+
+            res.status(200).json(bikes);
+        } catch (error) {
+            res.status(500).send({ message: 'Error listing bikes' });
+        }
+    };
+
     // public API
     return {
         createBike,
         updateBike,
         deleteBike,
+        findById,
+        listAllBikes,
     };
 })();
 
