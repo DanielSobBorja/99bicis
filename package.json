@@ -1,5 +1,5 @@
 {
-    "name": "bicis",
+    "name": "99bicis",
     "version": "1.0.0",
     "description": "aggregator using express",
     "main": "index.js",
