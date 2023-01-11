@@ -18,6 +18,6 @@ api.put('/:id', storeAPI.updateStore);
 
 // -- Delete --
 // delete bike by id
-//api.delete('/:id', storeAPI.deleteStore);
+api.delete('/:id', storeAPI.deleteStore);
 
 module.exports = api;

@@ -14,4 +14,9 @@ module.exports = [
         name: 'Pantano',
         address: 'Plaza España',
     },
+    {
+        _id: '63bf3537ad2346ad50393ee7',
+        name: 'Test borrar',
+        address: 'Algo',
+    },
 ];

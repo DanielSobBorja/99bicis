@@ -25,10 +25,24 @@ var storeAPI = (function () {
         }
     };
 
+    const deleteStore = async (req, res) => {
+        console.log('AAAAAAAAAAAA');
+        try {
+            let deletedStore = await Store.findByIdAndDelete(req.params.id);
+            if (!deletedStore) {
+                return res.status(404).send({ message: 'Store not found' });
+            }
+            res.status(200).json({ message: 'Store deleted' });
+        } catch (error) {
+            res.status(404).send({ message: 'Could not delete store' });
+        }
+    };
+
     // public API
     return {
         createStore,
         updateStore,
+        deleteStore,
     };
 })();
 

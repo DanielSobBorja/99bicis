@@ -45,4 +45,17 @@ describe('Store CRUD', () => {
                 expect(res.statusCode).toBe(200);
             });
     });
+
+    it('should delete a store', async () => {
+        let id = '63bf3537ad2346ad50393ee7';
+
+        return request(app)
+            .delete(`/store/${id}`)
+            .then((res) => {
+                expect(res.statusCode).toBe(200);
+                Store.findById(id).then((deleted_store) => {
+                    expect(deleted_store).toBeNull();
+                });
+            });
+    });
 });
