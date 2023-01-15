@@ -7,7 +7,7 @@ A Node.js server built with Express that serves as a bike aggregator.
 1. Clone the repo: `git clone https://github.com/DanielSobrino/99bicis.git`
 2. Install the dependencies: `npm install`
 3. Change the URIs in mongo-cfg to use your cluster and database
-4. Run the app in development `mode: npm run devstart`
+4. Run the app in development mode: `npm run devstart`
 
 ## Scripts
 
