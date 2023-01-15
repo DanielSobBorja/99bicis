@@ -43,3 +43,5 @@ async function migrate() {
 }
 
 migrate().catch(console.dir);
+
+module.exports = migrate;

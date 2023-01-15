@@ -7,7 +7,7 @@ var storeAPI = (function () {
             const store = await newStore.save();
             res.status(200).json(store);
         } catch (error) {
-            res.status(404).send({ message: 'Could not create store' });
+            res.status(500).send({ message: 'Could not create store' });
         }
     };
 
@@ -21,7 +21,7 @@ var storeAPI = (function () {
 
             res.status(200).json(updatedStore);
         } catch (error) {
-            res.status(404).send({ message: 'Could not update store' });
+            res.status(500).send({ message: 'Could not update store' });
         }
     };
 
@@ -33,7 +33,32 @@ var storeAPI = (function () {
             }
             res.status(200).json({ message: 'Store deleted' });
         } catch (error) {
-            res.status(404).send({ message: 'Could not delete store' });
+            res.status(500).send({ message: 'Could not delete store' });
+        }
+    };
+
+    const findById = async (req, res) => {
+        let { id } = req.params;
+
+        try {
+            let foundStore = await Store.findById(id);
+            if (!foundStore) {
+                res.status(404).send({ message: 'Store not found' });
+            } else {
+                res.status(200).json(foundStore);
+            }
+        } catch (error) {
+            res.status(500).send({ message: 'Error finding store' });
+        }
+    };
+
+    const listAllStores = async (req, res) => {
+        try {
+            let stores = await Store.find({});
+
+            res.status(200).json(stores);
+        } catch (error) {
+            res.status(500).send({ message: 'Error listing stores' });
         }
     };
 
@@ -42,6 +67,8 @@ var storeAPI = (function () {
         createStore,
         updateStore,
         deleteStore,
+        findById,
+        listAllStores,
     };
 })();
 

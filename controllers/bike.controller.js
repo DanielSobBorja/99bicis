@@ -8,7 +8,7 @@ var bikeAPI = (function () {
         if (success) {
             res.status(200).json(success);
         } else {
-            res.status(404).send({ message: 'Could not save bike' });
+            res.status(500).send({ message: 'Could not save bike' });
         }
     };
 
@@ -22,7 +22,7 @@ var bikeAPI = (function () {
 
             res.status(200).json(updatedBike);
         } catch (error) {
-            res.status(404).send({ message: 'Could not update bike' });
+            res.status(500).send({ message: 'Could not update bike' });
         }
     };
 
@@ -34,7 +34,7 @@ var bikeAPI = (function () {
             }
             res.status(200).json({ message: 'Bike deleted' });
         } catch (error) {
-            res.status(404).send({ message: 'Could not delete bike' });
+            res.status(500).send({ message: 'Could not delete bike' });
         }
     };
 

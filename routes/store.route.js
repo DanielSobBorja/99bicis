@@ -3,21 +3,21 @@ var api = express.Router();
 var { storeAPI } = require('../controllers/store.controller');
 
 // -- Get --
-// get bike by id
-//api.get('/:id', storeAPI.findById);
-// list all bikes
-//api.get('/', storeAPI.listAllStores);
+// get store by id
+api.get('/:id', storeAPI.findById);
+// list all stores
+api.get('/', storeAPI.listAllStores);
 
 // -- Post --
-// create bike
+// create store
 api.post('/create', storeAPI.createStore);
 
 // -- Put --
-// update bike by id
+// update store by id
 api.put('/:id', storeAPI.updateStore);
 
 // -- Delete --
-// delete bike by id
+// delete store by id
 api.delete('/:id', storeAPI.deleteStore);
 
 module.exports = api;

@@ -58,4 +58,26 @@ describe('Store CRUD', () => {
                 });
             });
     });
+
+    it('should find a store by id', async () => {
+        const store = await Store.create({
+            name: 'Galicia',
+            address: 'Palmita',
+        });
+        return request(app)
+            .get(`/store/${store._id}`)
+            .then((res) => {
+                expect(res.body.name).toBe(store.name);
+                expect(res.statusCode).toBe(200);
+            });
+    });
+
+    it('should list all stores', async () => {
+        return request(app)
+            .get('/store/')
+            .then((res) => {
+                expect(res.body.length).toBeGreaterThan(1);
+                expect(res.statusCode).toBe(200);
+            });
+    });
 });
