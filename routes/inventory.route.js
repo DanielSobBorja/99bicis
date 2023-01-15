@@ -1,13 +1,6 @@
 var express = require('express');
-var router = express.Router();
+var api = express.Router();
 var { inventoryAPI } = require('../controllers/inventory.controller');
-
-router.use(function (req, res, next) {
-    console.log(req.url);
-    console.log(req.params);
-
-    next();
-});
 
 // -- Get --
 // list all bikes in a store
@@ -17,14 +10,14 @@ router.use(function (req, res, next) {
 
 // -- Post --
 // create inventory by store id and bike id, optional stock
-//router.post('/inv', inventoryAPI.createInventory);
+api.post('/create', inventoryAPI.createInventory);
 
 // -- Put --
 // update inventory by inventory id
-//api.put('/inv/:id', inventoryAPI.updateInventory);
+api.put('/:id', inventoryAPI.updateInventory);
 
 // -- Delete --
 // delete bike by id
-//router.delete('/inv/:id', inventoryAPI.deleteInventory);
+api.delete('/:id', inventoryAPI.deleteInventory);
 
-module.exports = router;
+module.exports = api;

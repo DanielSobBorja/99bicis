@@ -2,12 +2,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 module.exports = [
     {
-        bike: ObjectId('63be79920a25c43ffcd60b3b'),
-        store: ObjectId('63bf14c652bb8ecabbb751b6'),
-        stock: 7,
-        price: 650,
-    },
-    {
+        _id: ObjectId('63c43286872b1946ee332770'), // for deletion test
         bike: ObjectId('63be79f2d91493ff8d93ab80'),
         store: ObjectId('63bf14c652bb8ecabbb751b6'),
         stock: 15,

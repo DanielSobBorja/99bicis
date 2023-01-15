@@ -10,6 +10,7 @@ const InventorySchema = new Schema({
     bike: { type: Schema.Types.ObjectId, ref: 'Bike', required: true },
     price: Number,
     stock: Number,
+    availableStock: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model('Inventory', InventorySchema);
