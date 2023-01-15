@@ -41,7 +41,7 @@ coming soon...
 
 ## Libraries
 
--   Express: Fast, unopinionated, minimalist web framework for Node.js
+-   Express: Web framework for Node.js
 -   Mongoose: MongoDB object modeling tool
 -   Morgan: Middleware for logging HTTP requests
 -   Jest: JavaScript Testing Framework
