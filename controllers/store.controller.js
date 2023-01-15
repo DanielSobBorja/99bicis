@@ -26,7 +26,6 @@ var storeAPI = (function () {
     };
 
     const deleteStore = async (req, res) => {
-        console.log('AAAAAAAAAAAA');
         try {
             let deletedStore = await Store.findByIdAndDelete(req.params.id);
             if (!deletedStore) {
