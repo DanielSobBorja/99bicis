@@ -1,4 +1,5 @@
 const Store = require('../models/store.model');
+const Inventory = require('../models/inventory.model');
 
 var storeAPI = (function () {
     const createStore = async (req, res) => {
@@ -27,10 +28,12 @@ var storeAPI = (function () {
 
     const deleteStore = async (req, res) => {
         try {
-            let deletedStore = await Store.findByIdAndDelete(req.params.id);
+            const storeId = req.params.id;
+            let deletedStore = await Store.findByIdAndDelete(storeId);
             if (!deletedStore) {
                 return res.status(404).send({ message: 'Store not found' });
             }
+            Inventory.deleteMany({ store: storeId });
             res.status(200).json({ message: 'Store deleted' });
         } catch (error) {
             res.status(500).send({ message: 'Could not delete store' });

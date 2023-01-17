@@ -16,6 +16,14 @@ var inventoryAPI = (function () {
         let { id } = req.params;
         let updates = req.body;
 
+        if (updates.availableStock > updates.stock) {
+            return res
+                .status(400)
+                .send({
+                    message: 'availableStock can not be greater than stock',
+                });
+        }
+
         try {
             await Inventory.findByIdAndUpdate(id, updates);
             let updatedInventory = await Inventory.findById(id);

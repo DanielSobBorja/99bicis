@@ -1,4 +1,5 @@
 const Bike = require('../models/bike.model');
+const Inventory = require('../models/inventory.model');
 
 var bikeAPI = (function () {
     const createBike = async (req, res) => {
@@ -28,10 +29,12 @@ var bikeAPI = (function () {
 
     const deleteBike = async (req, res) => {
         try {
-            let deletedBike = await Bike.findByIdAndDelete(req.params.id);
+            const bikeId = req.params.id;
+            let deletedBike = await Bike.findByIdAndDelete(bikeId);
             if (!deletedBike) {
                 return res.status(404).send({ message: 'Bike not found' });
             }
+            Inventory.deleteMany({ bike: bikeId });
             res.status(200).json({ message: 'Bike deleted' });
         } catch (error) {
             res.status(500).send({ message: 'Could not delete bike' });
