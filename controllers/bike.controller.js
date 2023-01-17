@@ -3,13 +3,12 @@ const Inventory = require('../models/inventory.model');
 
 var bikeAPI = (function () {
     const createBike = async (req, res) => {
-        const createdBike = new Bike(req.body);
-
-        const success = await createdBike.save();
-        if (success) {
-            res.status(200).json(success);
-        } else {
-            res.status(500).send({ message: 'Could not save bike' });
+        const newBike = new Bike(req.body);
+        try {
+            const store = await newBike.save();
+            res.status(200).json(store);
+        } catch (error) {
+            res.status(500).send({ message: `Could not save bike: ${error}` });
         }
     };
 
@@ -23,7 +22,9 @@ var bikeAPI = (function () {
 
             res.status(200).json(updatedBike);
         } catch (error) {
-            res.status(500).send({ message: 'Could not update bike' });
+            res.status(500).send({
+                message: `Could not update bike: ${error}`,
+            });
         }
     };
 
@@ -37,7 +38,9 @@ var bikeAPI = (function () {
             Inventory.deleteMany({ bike: bikeId });
             res.status(200).json({ message: 'Bike deleted' });
         } catch (error) {
-            res.status(500).send({ message: 'Could not delete bike' });
+            res.status(500).send({
+                message: `Could not delete bike: ${error}`,
+            });
         }
     };
 
@@ -52,7 +55,7 @@ var bikeAPI = (function () {
                 res.status(200).json(foundBike);
             }
         } catch (error) {
-            res.status(500).send({ message: 'Error finding bike' });
+            res.status(500).send({ message: `Error finding bike: ${error}` });
         }
     };
 
@@ -62,7 +65,7 @@ var bikeAPI = (function () {
 
             res.status(200).json(bikes);
         } catch (error) {
-            res.status(500).send({ message: 'Error listing bikes' });
+            res.status(500).send({ message: `Error listing bikes: ${error}` });
         }
     };
 

@@ -8,7 +8,9 @@ var inventoryAPI = (function () {
         if (success) {
             res.status(200).json(success);
         } else {
-            res.status(500).send({ message: 'Could not save inventory' });
+            res.status(500).send({
+                message: `Could not save inventory: ${error}`,
+            });
         }
     };
 
@@ -17,11 +19,9 @@ var inventoryAPI = (function () {
         let updates = req.body;
 
         if (updates.availableStock > updates.stock) {
-            return res
-                .status(400)
-                .send({
-                    message: 'availableStock can not be greater than stock',
-                });
+            return res.status(400).send({
+                message: 'availableStock can not be greater than stock',
+            });
         }
 
         try {
@@ -30,7 +30,9 @@ var inventoryAPI = (function () {
 
             res.status(200).json(updatedInventory);
         } catch (error) {
-            res.status(500).send({ message: 'Could not update inventory' });
+            res.status(500).send({
+                message: `Could not update inventory: ${error}`,
+            });
         }
     };
 
@@ -44,7 +46,9 @@ var inventoryAPI = (function () {
             }
             res.status(200).json({ message: 'Inventory deleted' });
         } catch (error) {
-            res.status(500).send({ message: 'Could not delete inventory' });
+            res.status(500).send({
+                message: `Could not delete inventory: ${error}`,
+            });
         }
     };
 
@@ -87,7 +91,35 @@ var inventoryAPI = (function () {
             await inventory.save();
             res.status(200).json({ message: 'Bike returned' });
         } catch (error) {
-            res.status(500).send({ message: 'Could not return bike' });
+            res.status(500).send({
+                message: `Could not return bike: ${error}`,
+            });
+        }
+    };
+
+    const listAllBikesInStore = async (req, res) => {
+        const storeId = req.params.id;
+
+        try {
+            const foundBikes = await Inventory.find({
+                store: storeId,
+            }).populate('bike');
+            res.status(200).json(foundBikes);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    };
+
+    const listAllStoresContainingBike = async (req, res) => {
+        const bikeId = req.params.id;
+
+        try {
+            const foundStores = await Inventory.find({
+                bike: bikeId,
+            }).populate('store');
+            res.status(200).json(foundStores);
+        } catch (error) {
+            res.status(500).send(error);
         }
     };
 
@@ -98,6 +130,8 @@ var inventoryAPI = (function () {
         deleteInventory,
         rentBike,
         returnBike,
+        listAllBikesInStore,
+        listAllStoresContainingBike,
     };
 })();
 

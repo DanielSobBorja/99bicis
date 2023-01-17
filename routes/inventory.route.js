@@ -4,9 +4,9 @@ var { inventoryAPI } = require('../controllers/inventory.controller');
 
 // -- Get --
 // list all bikes in a store
-// api.get('/bikes/:id', bikeAPI.listAllBikesInStore);
+api.get('/store/:id', inventoryAPI.listAllBikesInStore);
 // list all stores containing a bike
-// api.get('/stores/:id', bikeAPI.listAllStoresContainingBike);
+api.get('/bike/:id', inventoryAPI.listAllStoresContainingBike);
 
 // -- Post --
 // create inventory by store id and bike id, optional stock

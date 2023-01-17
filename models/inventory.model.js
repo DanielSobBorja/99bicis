@@ -11,6 +11,7 @@ const InventorySchema = new Schema({
     price: Number,
     stock: Number,
     availableStock: { type: Number, default: 0 },
+    rentedStock: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model('Inventory', InventorySchema);

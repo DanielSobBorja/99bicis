@@ -8,7 +8,9 @@ var storeAPI = (function () {
             const store = await newStore.save();
             res.status(200).json(store);
         } catch (error) {
-            res.status(500).send({ message: 'Could not create store' });
+            res.status(500).send({
+                message: `Could not create store: ${error}`,
+            });
         }
     };
 
@@ -22,7 +24,9 @@ var storeAPI = (function () {
 
             res.status(200).json(updatedStore);
         } catch (error) {
-            res.status(500).send({ message: 'Could not update store' });
+            res.status(500).send({
+                message: `Could not update store: ${error}`,
+            });
         }
     };
 
@@ -36,7 +40,9 @@ var storeAPI = (function () {
             Inventory.deleteMany({ store: storeId });
             res.status(200).json({ message: 'Store deleted' });
         } catch (error) {
-            res.status(500).send({ message: 'Could not delete store' });
+            res.status(500).send({
+                message: `Could not delete store: ${error}`,
+            });
         }
     };
 
@@ -51,7 +57,7 @@ var storeAPI = (function () {
                 res.status(200).json(foundStore);
             }
         } catch (error) {
-            res.status(500).send({ message: 'Error finding store' });
+            res.status(500).send({ message: `Error finding store: ${error}` });
         }
     };
 
@@ -61,7 +67,7 @@ var storeAPI = (function () {
 
             res.status(200).json(stores);
         } catch (error) {
-            res.status(500).send({ message: 'Error listing stores' });
+            res.status(500).send({ message: `Error listing stores: ${error}` });
         }
     };
 
