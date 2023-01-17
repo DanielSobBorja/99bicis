@@ -106,7 +106,9 @@ var inventoryAPI = (function () {
             }).populate('bike');
             res.status(200).json(foundBikes);
         } catch (error) {
-            res.status(500).send(error);
+            res.status(500).send({
+                message: `Could not list bikes: ${error}`,
+            });
         }
     };
 
@@ -119,7 +121,9 @@ var inventoryAPI = (function () {
             }).populate('store');
             res.status(200).json(foundStores);
         } catch (error) {
-            res.status(500).send(error);
+            res.status(500).send({
+                message: `Could not list stores: ${error}`,
+            });
         }
     };
 
