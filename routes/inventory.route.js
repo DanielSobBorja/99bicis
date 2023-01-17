@@ -20,4 +20,8 @@ api.put('/:id', inventoryAPI.updateInventory);
 // delete bike by id
 api.delete('/:id', inventoryAPI.deleteInventory);
 
+// -- RENTING --
+api.put('/:id/rent', inventoryAPI.rentBike);
+api.put('/:id/return', inventoryAPI.returnBike);
+
 module.exports = api;

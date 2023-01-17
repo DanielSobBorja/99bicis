@@ -7,7 +7,6 @@ const db = require('../db/mongo-cfg');
 
 describe('Bike CRUD', () => {
     beforeAll(async () => {
-        // set timeout??
         db.connect();
     });
 

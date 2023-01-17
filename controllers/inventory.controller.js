@@ -40,11 +40,56 @@ var inventoryAPI = (function () {
         }
     };
 
+    const rentBike = async (req, res) => {
+        const inventoryId = req.params.id;
+        const { quantity } = req.body;
+
+        try {
+            const inventory = await Inventory.findById(inventoryId);
+            if (!inventory) {
+                return res.status(404).json({ message: 'Inventory not found' });
+            }
+            if (inventory.availableStock < quantity) {
+                return res
+                    .status(400)
+                    .json({ message: 'Not enough available stock' });
+            }
+            inventory.availableStock -= quantity;
+            await inventory.save();
+            res.status(200).json({ message: 'Bike rented' });
+        } catch (error) {
+            res.status(500).json({ message: 'Could not rent bike' });
+        }
+    };
+
+    const returnBike = async function (req, res) {
+        const inventoryId = req.params.id;
+        const { quantity } = req.body;
+        try {
+            const inventory = await Inventory.findById(inventoryId);
+            if (!inventory) {
+                return res.status(404).send({ message: 'Inventory not found' });
+            }
+            inventory.availableStock += quantity;
+            if (inventory.availableStock > inventory.stock) {
+                return res.status(400).send({
+                    message: 'Cannot return more bikes than rented bikes',
+                });
+            }
+            await inventory.save();
+            res.status(200).json({ message: 'Bike returned' });
+        } catch (error) {
+            res.status(500).send({ message: 'Could not return bike' });
+        }
+    };
+
     // public API
     return {
         createInventory,
         updateInventory,
         deleteInventory,
+        rentBike,
+        returnBike,
     };
 })();
 
