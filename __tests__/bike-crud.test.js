@@ -2,6 +2,8 @@ const app = require('../app');
 const request = require('supertest');
 const { expect } = require('@jest/globals');
 const Bike = require('../models/bike.model');
+const Store = require('../models/store.model');
+const Inventory = require('../models/inventory.model');
 
 const db = require('../db/mongo-cfg');
 
@@ -56,16 +58,28 @@ describe('Bike CRUD', () => {
             });
     });
 
-    it('should delete a bike', async () => {
-        let id = '63be79920a25c43ffcd60b3b';
+    it('should delete a bike and its associated inventories', async () => {
+        const bike = await Bike.create({ name: 'aaa' });
+        const store = await Store.create({ name: 'bbb' });
+        const inventory = await Inventory.create({
+            bike: bike._id,
+            store: store._id,
+            price: 100,
+            stock: 10,
+        });
 
-        return request(app)
-            .delete(`/bike/${id}`)
-            .then((res) => {
+        await request(app)
+            .delete(`/bike/${bike._id}`)
+            .then(async (res) => {
                 expect(res.statusCode).toBe(200);
-                Bike.findById(id).then((deleted_bike) => {
-                    expect(deleted_bike).toBeNull();
-                });
+
+                const deletedBike = await Bike.findById(bike._id);
+                const deletedInventory = await Inventory.findById(
+                    inventory._id
+                );
+
+                expect(deletedBike).toBeNull();
+                expect(deletedInventory).toBeNull();
             });
     });
 

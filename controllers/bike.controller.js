@@ -35,7 +35,7 @@ var bikeAPI = (function () {
             if (!deletedBike) {
                 return res.status(404).send({ message: 'Bike not found' });
             }
-            Inventory.deleteMany({ bike: bikeId });
+            await Inventory.deleteMany({ bike: bikeId });
             res.status(200).json({ message: 'Bike deleted' });
         } catch (error) {
             res.status(500).send({

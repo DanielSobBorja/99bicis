@@ -37,7 +37,7 @@ var storeAPI = (function () {
             if (!deletedStore) {
                 return res.status(404).send({ message: 'Store not found' });
             }
-            Inventory.deleteMany({ store: storeId });
+            await Inventory.deleteMany({ store: storeId });
             res.status(200).json({ message: 'Store deleted' });
         } catch (error) {
             res.status(500).send({
