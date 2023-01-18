@@ -27,9 +27,9 @@ A Node.js server built with Express that serves as a bike aggregator.
 
 ## Features
 
-CRUD operations for bike entities
-CRUD operations for store entities
-More to come...
+CRUD operations for bike, store and inventory entities
+
+Renting of bikes from a store
 
 ## ER Model
 
