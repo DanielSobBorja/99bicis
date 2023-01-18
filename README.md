@@ -39,6 +39,15 @@ coming soon...
 
 coming soon...
 
+## TODO list (priority ^)
+
+Use cool JS
+Repository/Service layers => decoupling
+Update README
+Middleware
+Auth
+Logging
+
 ## Libraries
 
 -   Express: Web framework for Node.js
