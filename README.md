@@ -41,12 +41,12 @@ coming soon...
 
 ## TODO list (priority ^)
 
-Use cool JS
-Repository/Service layers => decoupling
-Update README
-Middleware
-Auth
-Logging
+-   Use cool JS
+-   Repository/Service layers => decoupling
+-   Update README
+-   Middleware
+-   Auth
+-   Logging
 
 ## Libraries
 
