@@ -40,13 +40,13 @@ describe('Inventory CRUD', () => {
             bike: '63be79920a25c43ffcd60b3b',
             store: '63bf14c652bb8ecabbb751b6',
         });
-        const updates = { stock: 15, availableStock: 10 };
+        const updates = { stock: 15, rentableStock: 10 };
         return request(app)
             .put(`/inventory/${inventory._id}`)
             .send(updates)
             .then((res) => {
                 expect(res.body.stock).toBe(updates.stock);
-                expect(res.body.availableStock).toBe(updates.availableStock);
+                expect(res.body.rentableStock).toBe(updates.rentableStock);
                 expect(res.statusCode).toBe(200);
             });
     });
@@ -90,7 +90,7 @@ describe('Inventory CRUD', () => {
             bike: bike1._id,
             price: 200,
             stock: 10,
-            availableStock: 6,
+            rentableStock: 6,
             rentedStock: 2,
         });
         await Inventory.create({
@@ -98,7 +98,7 @@ describe('Inventory CRUD', () => {
             bike: bike2._id,
             price: 300,
             stock: 15,
-            availableStock: 10,
+            rentableStock: 10,
             rentedStock: 5,
         });
         await Inventory.create({
@@ -106,7 +106,7 @@ describe('Inventory CRUD', () => {
             bike: bike3._id,
             price: 400,
             stock: 20,
-            availableStock: 20,
+            rentableStock: 20,
             rentedStock: 0,
         });
 

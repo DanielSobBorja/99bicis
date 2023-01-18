@@ -10,7 +10,7 @@ const InventorySchema = new Schema({
     bike: { type: Schema.Types.ObjectId, ref: 'Bike', required: true },
     price: Number,
     stock: Number,
-    availableStock: { type: Number, default: 0 },
+    rentableStock: { type: Number, default: 0 },
     rentedStock: { type: Number, default: 0 },
 });
 

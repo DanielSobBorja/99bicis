@@ -18,7 +18,7 @@ describe('Renting', () => {
         }, 1000);
     });
 
-    it('should rent a bike and decrease available stock', async () => {
+    it('should rent a bike and increase rented bikes', async () => {
         const store = await Store.create({
             name: 'Example Store',
             address: 'Example Street',
@@ -45,7 +45,8 @@ describe('Renting', () => {
             store: store._id,
             price: 100,
             stock: 10,
-            availableStock: 10,
+            rentableStock: 10,
+            rentedStock: 8,
         });
 
         return request(app)
@@ -54,12 +55,12 @@ describe('Renting', () => {
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 Inventory.findById(inventory._id).then((inventory) => {
-                    expect(inventory.availableStock).toBe(8);
+                    expect(inventory.rentedStock).toBe(10);
                 });
             });
     });
 
-    it('should return a bike and increase available stock', async () => {
+    it('should return a bike and decrease rented bikes', async () => {
         const store = await Store.create({
             name: 'Test Store',
             address: 'Test Address',
@@ -86,7 +87,8 @@ describe('Renting', () => {
             store: store._id,
             price: 1000,
             stock: 10,
-            availableStock: 8,
+            rentableStock: 8,
+            rentedStock: 8,
         });
         return request(app)
             .put(`/inventory/${inventory._id}/return`)
@@ -94,7 +96,7 @@ describe('Renting', () => {
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 Inventory.findById(inventory._id).then((inventory) => {
-                    expect(inventory.availableStock).toBe(10);
+                    expect(inventory.rentedStock).toBe(6);
                 });
             });
     });

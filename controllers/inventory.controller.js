@@ -2,8 +2,20 @@ const Inventory = require('../models/inventory.model');
 
 var inventoryAPI = (function () {
     const createInventory = async (req, res) => {
-        const createdInventory = new Inventory(req.body);
+        const params = req.body;
 
+        if (params.rentableStock > params.stock) {
+            return res.status(400).send({
+                message: 'rentableStock can not be greater than stock',
+            });
+        }
+        if (params.rentedStock > params.rentableStock) {
+            return res.status(400).send({
+                message: 'rentedStock can not be greater than rentableStock',
+            });
+        }
+
+        const createdInventory = new Inventory(req.body);
         const success = await createdInventory.save();
         if (success) {
             res.status(200).json(success);
@@ -18,9 +30,14 @@ var inventoryAPI = (function () {
         let { id } = req.params;
         let updates = req.body;
 
-        if (updates.availableStock > updates.stock) {
+        if (updates.rentableStock > updates.stock) {
             return res.status(400).send({
-                message: 'availableStock can not be greater than stock',
+                message: 'rentableStock can not be greater than stock',
+            });
+        }
+        if (updates.rentedStock > updates.rentableStock) {
+            return res.status(400).send({
+                message: 'rentedStock can not be greater than rentableStock',
             });
         }
 
@@ -61,14 +78,16 @@ var inventoryAPI = (function () {
             if (!inventory) {
                 return res.status(404).json({ message: 'Inventory not found' });
             }
-            if (inventory.availableStock < quantity) {
+            if (inventory.rentableStock - inventory.rentedStock < quantity) {
                 return res
                     .status(400)
-                    .json({ message: 'Not enough available stock' });
+                    .json({ message: 'Not enough rentable stock' });
             }
-            inventory.availableStock -= quantity;
+            inventory.rentedStock += quantity;
             await inventory.save();
-            res.status(200).json({ message: 'Bike rented' });
+            res.status(200).json({
+                message: `Bike${quantity > 1 ? 's' : ''} rented`,
+            });
         } catch (error) {
             res.status(500).json({ message: 'Could not rent bike' });
         }
@@ -82,14 +101,16 @@ var inventoryAPI = (function () {
             if (!inventory) {
                 return res.status(404).send({ message: 'Inventory not found' });
             }
-            inventory.availableStock += quantity;
-            if (inventory.availableStock > inventory.stock) {
+            inventory.rentedStock -= quantity;
+            if (inventory.rentedStock < 0) {
                 return res.status(400).send({
                     message: 'Cannot return more bikes than rented bikes',
                 });
             }
             await inventory.save();
-            res.status(200).json({ message: 'Bike returned' });
+            res.status(200).json({
+                message: `Bike${quantity > 1 ? 's' : ''} returned`,
+            });
         } catch (error) {
             res.status(500).send({
                 message: `Could not return bike: ${error}`,
