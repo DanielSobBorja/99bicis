@@ -33,7 +33,7 @@ More to come...
 
 ## ER Model
 
-coming soon...
+![ER Model. Could not load image](ERdiagram.png?raw=true 'ER Model')
 
 ## Endpoints
 
