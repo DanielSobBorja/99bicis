@@ -87,6 +87,7 @@ var inventoryAPI = (function () {
             await inventory.save();
             res.status(200).json({
                 message: `Bike${quantity > 1 ? 's' : ''} rented`,
+                ...inventory,
             });
         } catch (error) {
             res.status(500).json({ message: 'Could not rent bike' });
@@ -110,6 +111,7 @@ var inventoryAPI = (function () {
             await inventory.save();
             res.status(200).json({
                 message: `Bike${quantity > 1 ? 's' : ''} returned`,
+                ...inventory,
             });
         } catch (error) {
             res.status(500).send({
