@@ -37,7 +37,56 @@ Renting of bikes from a store
 
 ## Endpoints
 
-coming soon...
+I have setup three different routers: bike, inventory and store, each with their own endpoints.
+
+### GET
+
+#### Get by id
+
+`/bike/:id`
+`/store/:id`
+
+#### List all
+
+`/bike/`
+`/store/`
+
+#### List all bikes in a store
+
+`/inventory/store/:id`
+
+#### List all stores containing a bike
+
+`/inventory/bike/:id`
+
+### POST
+
+#### Create
+
+`/bike/create`
+`/store/create`
+`/inventory/create`
+
+### PUT
+
+#### Update by id
+
+`/bike/:id`
+`/store/:id`
+`/inventory/:id`
+
+#### Rent and return a bike
+
+`/inventory/:id/rent`
+`/inventory/:id/return`
+
+### Delete
+
+#### Delete by id
+
+`/bike/:id`
+`/store/:id`
+`/inventory/:id`
 
 ## TODO list (priority ^)
 
