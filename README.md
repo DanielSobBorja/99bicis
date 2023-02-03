@@ -26,7 +26,7 @@ Added tests for all success situations. Notable code coverage.
 
 ## Setup
 
-1. Clone the repo: `git clone https://github.com/DanielSobrino/99bicis.git`
+1. Clone the repo: `git clone https://github.com/DanielSobBorja/99bicis.git`
 2. Install the dependencies: `npm install`
 3. Setup your mongoDB user and password environment variables
 4. Change the URIs in mongo-cfg to use your cluster and database
