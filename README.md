@@ -105,15 +105,6 @@ I have setup three different routers: bike, inventory and store, each with their
 `/store/:id`
 `/inventory/:id`
 
-## TODO list (priority ^)
-
--   Use cool JS
--   Repository/Service layers => decoupling
--   Update README
--   Middleware
--   Auth
--   Logging
-
 ## Libraries
 
 -   Express: Web framework for Node.js
@@ -124,3 +115,9 @@ I have setup three different routers: bike, inventory and store, each with their
 ## License
 
 This project is licensed under the MIT License. See LICENSE for details.
+
+## Might do list
+
+-   Repository/Service layers => decoupling
+-   Middleware
+-   Logging (morgan)
