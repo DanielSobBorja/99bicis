@@ -49,15 +49,14 @@ describe('Renting', () => {
             rentedStock: 8,
         });
 
-        return request(app)
+        const res = await request(app)
             .put(`/inventory/${inventory._id}/rent`)
-            .send({ quantity: 2 })
-            .then((res) => {
-                expect(res.statusCode).toBe(200);
-                Inventory.findById(inventory._id).then((inventory) => {
-                    expect(inventory.rentedStock).toBe(10);
-                });
-            });
+            .send({ quantity: 2 });
+
+        expect(res.statusCode).toBe(200);
+        Inventory.findById(inventory._id).then((inventory) => {
+            expect(inventory.rentedStock).toBe(10);
+        });
     });
 
     it('should return a bike and decrease rented bikes', async () => {
@@ -90,14 +89,13 @@ describe('Renting', () => {
             rentableStock: 8,
             rentedStock: 8,
         });
-        return request(app)
+        const res = await request(app)
             .put(`/inventory/${inventory._id}/return`)
-            .send({ quantity: 2 })
-            .then((res) => {
-                expect(res.statusCode).toBe(200);
-                Inventory.findById(inventory._id).then((inventory) => {
-                    expect(inventory.rentedStock).toBe(6);
-                });
-            });
+            .send({ quantity: 2 });
+
+        expect(res.statusCode).toBe(200);
+        Inventory.findById(inventory._id).then((inventory) => {
+            expect(inventory.rentedStock).toBe(6);
+        });
     });
 });

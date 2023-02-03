@@ -36,26 +36,22 @@ describe('Bike CRUD', () => {
             seatpost: 'Dropper',
             brand_site: 'https://www.examplebrand.com/',
         };
-        return request(app)
-            .post('/bike/create')
-            .send(bikeExample)
-            .then((res) => {
-                expect(res.body.name).toBe(bikeExample.name);
-                expect(res.statusCode).toBe(200);
-            });
+        const res = await request(app).post('/bike/create').send(bikeExample);
+
+        expect(res.body.name).toBe(bikeExample.name);
+        expect(res.statusCode).toBe(200);
     });
 
     it('should update a bike', async () => {
         const id = '63be79920a25c43ffcd60b3b';
 
-        return request(app)
+        const res = await request(app)
             .put(`/bike/${id}`)
-            .send({ name: 'New Name', category: 'Road Bike' })
-            .then((res) => {
-                expect(res.body.name).toBe('New Name');
-                expect(res.body.category).toBe('Road Bike');
-                expect(res.statusCode).toBe(200);
-            });
+            .send({ name: 'New Name', category: 'Road Bike' });
+
+        expect(res.body.name).toBe('New Name');
+        expect(res.body.category).toBe('Road Bike');
+        expect(res.statusCode).toBe(200);
     });
 
     it('should delete a bike and its associated inventories', async () => {
@@ -68,19 +64,15 @@ describe('Bike CRUD', () => {
             stock: 10,
         });
 
-        await request(app)
-            .delete(`/bike/${bike._id}`)
-            .then(async (res) => {
-                expect(res.statusCode).toBe(200);
+        const res = await request(app).delete(`/bike/${bike._id}`);
 
-                const deletedBike = await Bike.findById(bike._id);
-                const deletedInventory = await Inventory.findById(
-                    inventory._id
-                );
+        expect(res.statusCode).toBe(200);
 
-                expect(deletedBike).toBeNull();
-                expect(deletedInventory).toBeNull();
-            });
+        const deletedBike = await Bike.findById(bike._id);
+        const deletedInventory = await Inventory.findById(inventory._id);
+
+        expect(deletedBike).toBeNull();
+        expect(deletedInventory).toBeNull();
     });
 
     it('should find a bike by id', async () => {
@@ -101,20 +93,16 @@ describe('Bike CRUD', () => {
             seatpost: 'Carbon Fiber',
             brand_site: 'https://www.examplebrand.com/',
         });
-        return request(app)
-            .get(`/bike/${bike._id}`)
-            .then((res) => {
-                expect(res.body.name).toBe(bike.name);
-                expect(res.statusCode).toBe(200);
-            });
+        const res = await request(app).get(`/bike/${bike._id}`);
+
+        expect(res.body.name).toBe(bike.name);
+        expect(res.statusCode).toBe(200);
     });
 
     it('should list all bikes', async () => {
-        return request(app)
-            .get('/bike/')
-            .then((res) => {
-                expect(res.body.length).toBeGreaterThan(1);
-                expect(res.statusCode).toBe(200);
-            });
+        const res = await request(app).get('/bike/');
+
+        expect(res.body.length).toBeGreaterThan(1);
+        expect(res.statusCode).toBe(200);
     });
 });

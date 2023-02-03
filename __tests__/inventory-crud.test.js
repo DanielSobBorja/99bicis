@@ -23,14 +23,13 @@ describe('Inventory CRUD', () => {
             bike: '63be79920a25c43ffcd60b3b',
             store: '63bf14c652bb8ecabbb751b6',
         };
-        return request(app)
+        const res = await request(app)
             .post('/inventory/create')
-            .send(inventoryExample)
-            .then((res) => {
-                expect(res.body.bike).toBe(inventoryExample.bike);
-                expect(res.body.store).toBe(inventoryExample.store);
-                expect(res.statusCode).toBe(200);
-            });
+            .send(inventoryExample);
+
+        expect(res.body.bike).toBe(inventoryExample.bike);
+        expect(res.body.store).toBe(inventoryExample.store);
+        expect(res.statusCode).toBe(200);
     });
 
     //TODO: Should fail create if there is already another inventory with the same store and bike
@@ -41,27 +40,24 @@ describe('Inventory CRUD', () => {
             store: '63bf14c652bb8ecabbb751b6',
         });
         const updates = { stock: 15, rentableStock: 10 };
-        return request(app)
+        const res = await request(app)
             .put(`/inventory/${inventory._id}`)
-            .send(updates)
-            .then((res) => {
-                expect(res.body.stock).toBe(updates.stock);
-                expect(res.body.rentableStock).toBe(updates.rentableStock);
-                expect(res.statusCode).toBe(200);
-            });
+            .send(updates);
+
+        expect(res.body.stock).toBe(updates.stock);
+        expect(res.body.rentableStock).toBe(updates.rentableStock);
+        expect(res.statusCode).toBe(200);
     });
 
     it('should delete an inventory', async () => {
         let id = '63c43286872b1946ee332770';
 
-        return request(app)
-            .delete(`/inventory/${id}`)
-            .then((res) => {
-                expect(res.statusCode).toBe(200);
-                Inventory.findById(id).then((deleted_inventory) => {
-                    expect(deleted_inventory).toBeNull();
-                });
-            });
+        const res = await request(app).delete(`/inventory/${id}`);
+
+        expect(res.statusCode).toBe(200);
+        Inventory.findById(id).then((deleted_inventory) => {
+            expect(deleted_inventory).toBeNull();
+        });
     });
 
     it('should return all bikes from a store', async () => {
@@ -110,15 +106,13 @@ describe('Inventory CRUD', () => {
             rentedStock: 0,
         });
 
-        return request(app)
-            .get(`/inventory/store/${store._id}`)
-            .then((res) => {
-                expect(res.status).toBe(200);
-                expect(res.body.length).toBe(3);
-                expect(res.body[0].bike.name).toBe('Bike 1');
-                expect(res.body[1].bike.name).toBe('Bike 2');
-                expect(res.body[2].bike.name).toBe('Bike 3');
-            });
+        const res = await request(app).get(`/inventory/store/${store._id}`);
+
+        expect(res.status).toBe(200);
+        expect(res.body.length).toBe(3);
+        expect(res.body[0].bike.name).toBe('Bike 1');
+        expect(res.body[1].bike.name).toBe('Bike 2');
+        expect(res.body[2].bike.name).toBe('Bike 3');
     });
 
     it('should list all stores containing a bike', async () => {
@@ -149,13 +143,11 @@ describe('Inventory CRUD', () => {
             stock: 7,
         });
 
-        return request(app)
-            .get(`/inventory/bike/${bike._id}`)
-            .then((res) => {
-                expect(res.statusCode).toBe(200);
-                expect(res.body).toHaveLength(2);
-                expect(res.body[0].store.name).toBe(store1.name);
-                expect(res.body[1].store.name).toBe(store2.name);
-            });
+        const res = await request(app).get(`/inventory/bike/${bike._id}`);
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toHaveLength(2);
+        expect(res.body[0].store.name).toBe(store1.name);
+        expect(res.body[1].store.name).toBe(store2.name);
     });
 });

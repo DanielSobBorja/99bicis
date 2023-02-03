@@ -23,14 +23,11 @@ describe('Store CRUD', () => {
             name: 'Ejemplita',
             address: 'Plaza de ejemplo',
         };
-        return request(app)
-            .post('/store/create')
-            .send(storeExample)
-            .then((res) => {
-                expect(res.body.name).toBe(storeExample.name);
-                expect(res.body.address).toBe(storeExample.address);
-                expect(res.statusCode).toBe(200);
-            });
+        const res = await request(app).post('/store/create').send(storeExample);
+
+        expect(res.body.name).toBe(storeExample.name);
+        expect(res.body.address).toBe(storeExample.address);
+        expect(res.statusCode).toBe(200);
     });
 
     it('should update a store', async () => {
@@ -39,13 +36,10 @@ describe('Store CRUD', () => {
             address: 'Francia',
         });
         const updates = { address: 'Palma de Mallorca' };
-        return request(app)
-            .put(`/store/${store._id}`)
-            .send(updates)
-            .then((res) => {
-                expect(res.body.address).toBe(updates.address);
-                expect(res.statusCode).toBe(200);
-            });
+        const res = await request(app).put(`/store/${store._id}`).send(updates);
+
+        expect(res.body.address).toBe(updates.address);
+        expect(res.statusCode).toBe(200);
     });
 
     it('should delete a store and its associated inventories', async () => {
@@ -78,20 +72,16 @@ describe('Store CRUD', () => {
             name: 'Galicia',
             address: 'Palmita',
         });
-        return request(app)
-            .get(`/store/${store._id}`)
-            .then((res) => {
-                expect(res.body.name).toBe(store.name);
-                expect(res.statusCode).toBe(200);
-            });
+        const res = await request(app).get(`/store/${store._id}`);
+
+        expect(res.body.name).toBe(store.name);
+        expect(res.statusCode).toBe(200);
     });
 
     it('should list all stores', async () => {
-        return request(app)
-            .get('/store/')
-            .then((res) => {
-                expect(res.body.length).toBeGreaterThan(1);
-                expect(res.statusCode).toBe(200);
-            });
+        const res = await request(app).get('/store/');
+
+        expect(res.body.length).toBeGreaterThan(1);
+        expect(res.statusCode).toBe(200);
     });
 });
