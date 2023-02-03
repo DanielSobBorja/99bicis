@@ -4,7 +4,7 @@ A Node.js server built with Express that serves as a bike aggregator.
 
 ## Project features
 
-CRUD operations for bike, store and inventory entities
+CRUD operations for bike, store and inventory entities</br>
 Renting of bikes from stores
 
 ### DIW features
