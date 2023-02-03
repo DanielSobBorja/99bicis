@@ -9,15 +9,15 @@ Renting of bikes from stores
 
 ### DIW features
 
-| **Feature**     | **Files:lines**                                                       | **Preview Image**                                                                          |
-| --------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Arrow functions | /tests: everywhere</br> /controllers: everywhere /db/mongo-cfg: 13,27 | ![Arrow function. Could not load image](/img/arrow-function.png?raw=true 'Arrow function') |
-| Async functions | - /tests: everywhere - /controllers: everywhere - /db: everywhere     | ![Async function. Could not load image](/img/async-function.png?raw=true 'Async function') |
-| Module pattern  | /controllers: everywhere                                              | ![Module pattern. Could not load image](/img/module-pattern.png?raw=true 'Module Pattern') |
-| Env. variables  | - /db/mongo-cfg:everywhere                                            | ![Env. Variables. Could not load image](/img/env-variables.png?raw=true 'Env. Variables')  |
-| Environments    | - /db/mongo-cfg:3-9 - /package.json:7-13                              | ![Environments. Could not load image](/img/environments.png?raw=true 'Environments')       |
-| Destructuring   | /tests/bike-crud:3</br> /controllers/bike:16,36...                    | ![Destructuring. Could not load image](/img/destructuring.png?raw=true 'Destructuring')    |
-| Spreading       | /controllers/inventory:90, 114                                        | ![Spreading. Could not load image](/img/spreading.png?raw=true 'Spreading')                |
+| **Feature**     | **Files:lines**                                                           | **Preview Image**                                                                          |
+| --------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Arrow functions | /tests: everywhere</br> /controllers: everywhere<br/>/db/mongo-cfg: 13,27 | ![Arrow function. Could not load image](/img/arrow-function.png?raw=true 'Arrow function') |
+| Async functions | /tests: everywhere<br/>/controllers: everywhere<br/>/db: everywhere       | ![Async function. Could not load image](/img/async-function.png?raw=true 'Async function') |
+| Module pattern  | /controllers: everywhere                                                  | ![Module pattern. Could not load image](/img/module-pattern.png?raw=true 'Module Pattern') |
+| Env. variables  | /db/mongo-cfg:everywhere                                                  | ![Env. Variables. Could not load image](/img/env-variables.png?raw=true 'Env. Variables')  |
+| Environments    | /db/mongo-cfg:3-9<br/>/package.json:7-13                                  | ![Environments. Could not load image](/img/environments.png?raw=true 'Environments')       |
+| Destructuring   | /tests/bike-crud:3</br>/controllers/bike:16,36...                         | ![Destructuring. Could not load image](/img/destructuring.png?raw=true 'Destructuring')    |
+| Spreading       | /controllers/inventory:90, 114                                            | ![Spreading. Could not load image](/img/spreading.png?raw=true 'Spreading')                |
 
 #### Testing
 
