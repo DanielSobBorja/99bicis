@@ -17,7 +17,7 @@ module.exports = [
         suspension: 'Air',
         front_travel: 220,
         seatpost: 'Thrower',
-        brand_site: 'https://www.bbbb.com/',
+        brand: 'https://www.bbbb.com/',
     },
     {
         _id: ObjectId('63be79f2d91493ff8d93ab80'),
@@ -35,7 +35,7 @@ module.exports = [
         suspension: 'Air',
         front_travel: 110,
         seatpost: 'Dropper',
-        brand_site: 'https://www.aaaa.com/',
+        brand: 'https://www.aaaa.com/',
     },
     {
         _id: ObjectId('63be7aa2e873a9fcc9345930'),
@@ -53,7 +53,7 @@ module.exports = [
         suspension: 'Air',
         front_travel: 150,
         seatpost: 'Dropper',
-        brand_site: 'https://www.cccc.com/',
+        brand: 'https://www.cccc.com/',
     },
     {
         _id: ObjectId('63be7ab36260b6af45c49708'),
@@ -71,6 +71,6 @@ module.exports = [
         suspension: 'Air',
         front_travel: 300,
         seatpost: 'Launcher',
-        brand_site: 'https://www.dddd.com/',
+        brand: 'https://www.dddd.com/',
     },
 ];

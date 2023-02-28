@@ -20,7 +20,7 @@ const BikeSchema = Schema({
     suspension: String,
     front_travel: Number,
     seatpost: String,
-    brand_site: String,
+    brand: String,
 });
 
 module.exports = mongoose.model('Bike', BikeSchema);

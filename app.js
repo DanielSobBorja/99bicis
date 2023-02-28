@@ -18,6 +18,10 @@ app.use('/bike', bikeRouter);
 app.use('/store', storeRouter);
 app.use('/inventory', inventoryRouter);
 
+const pageRouter = require('./routes/page.route');
+app.use(express.static('public'));
+app.use('/', pageRouter);
+
 app.use((req, res) => res.status(404).json({ error: 'not found' }));
 
 module.exports = app;

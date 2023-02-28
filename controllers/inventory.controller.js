@@ -69,6 +69,22 @@ var inventoryAPI = (function () {
         }
     };
 
+    const listAllAvailableInventories = async (req, res) => {
+        try {
+            let inventories = await Inventory.find({
+                rentableStock: { $gt: 0 },
+            })
+                .populate('bike')
+                .populate('store');
+
+            res.status(200).json(inventories);
+        } catch (error) {
+            res.status(500).send({
+                message: `Error listing available inventories: ${error}`,
+            });
+        }
+    };
+
     const rentBike = async (req, res) => {
         const inventoryId = req.params.id;
         const { quantity } = req.body;
@@ -159,6 +175,7 @@ var inventoryAPI = (function () {
         returnBike,
         listAllBikesInStore,
         listAllStoresContainingBike,
+        listAllAvailableInventories,
     };
 })();
 

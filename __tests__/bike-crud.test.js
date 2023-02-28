@@ -34,7 +34,7 @@ describe('Bike CRUD', () => {
             suspension: 'Air',
             front_travel: 120,
             seatpost: 'Dropper',
-            brand_site: 'https://www.examplebrand.com/',
+            brand: 'https://www.examplebrand.com/',
         };
         const res = await request(app).post('/bike/create').send(bikeExample);
 
@@ -91,7 +91,7 @@ describe('Bike CRUD', () => {
             suspension: 'None',
             front_travel: 0,
             seatpost: 'Carbon Fiber',
-            brand_site: 'https://www.examplebrand.com/',
+            brand: 'https://www.examplebrand.com/',
         });
         const res = await request(app).get(`/bike/${bike._id}`);
 
@@ -105,4 +105,70 @@ describe('Bike CRUD', () => {
         expect(res.body.length).toBeGreaterThan(1);
         expect(res.statusCode).toBe(200);
     });
+
+    /*it('should return filtered bikes', async () => {
+        const bike1 = await Bike.create({
+            name: 'Trek Madone',
+            category: 'Road',
+            price: 2000,
+        });
+        const bike2 = await Bike.create({
+            name: 'Giant Defy',
+            brand: 'Giant',
+            category: 'Road',
+            price: 1500,
+        });
+        const bike3 = await Bike.create({
+            name: 'Specialized Stumpjumper',
+            brand: 'Specialized',
+            category: 'Mountain',
+            price: 3000,
+        });
+        const bike4 = await Bike.create({
+            name: 'Trek Madone',
+            brand: 'Trek',
+            price: 3000,
+        });
+        const store1 = await Store.create({ name: 'ccc' });
+        const store2 = await Store.create({ name: 'ddd' });
+        const inventory1 = await Inventory.create({
+            bike: bike1._id,
+            store: store1._id,
+            availableStock: 2,
+        });
+        await Inventory.create({
+            bike: bike2._id,
+            store: store1._id,
+            availableStock: 0,
+        });
+        await Inventory.create({
+            bike: bike3._id,
+            store: store2._id,
+            availableStock: 5,
+        });
+        await Inventory.create({
+            bike: bike4._id,
+            store: store2._id,
+            availableStock: 0,
+        });
+
+        const res = await request(app)
+            .put(`/bike/bike`)
+            .send({ name: 'Trek', stock: true });
+
+        expect(res.statusCode).toBe(200);
+        expect(response.body).toEqual([
+            {
+                _id: inventory1._id.toString(),
+                bike: {
+                    _id: bike1._id.toString(),
+                    name: bike1.name,
+                    brand: bike1.brand,
+                    category: bike1.category,
+                    price: bike1.price,
+                },
+                availableStock: inventory1.availableStock,
+            },
+        ]);
+    });*/
 });

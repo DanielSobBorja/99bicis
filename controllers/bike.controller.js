@@ -69,6 +69,48 @@ var bikeAPI = (function () {
         }
     };
 
+    const filterBikes = async (req, res) => {
+        try {
+            const { name, brand, category, price, stock } = req.body;
+            console.log('A');
+            const bikes = await Bike.find({
+                name: { $regex: name, $options: 'i', $exists: true },
+                brand: { $regex: brand, $options: 'i', $exists: true },
+                category: { $regex: category, $options: 'i', $exists: true },
+                price: { $lte: price, $exists: true },
+            });
+            console.log('B');
+            let filterStock = {};
+            if (stock) {
+                console.log('C');
+                // Buscar inventarios con stock mayor a cero
+                filterStock = { availableStock: { $gt: 0 } };
+            }
+            console.log('D');
+            const inventories = await Inventory.find(filterStock);
+            console.log('E');
+            // Filtrar aquellos inventarios que tengan la bici de bikes
+            const filteredInventories = inventories.filter((inventory) => {
+                console.log('F');
+                return bikes.some((bike) => {
+                    console.log('G');
+                    return bike._id.equals(inventory.bike);
+                });
+            });
+            console.log('H');
+            const inventoriesWithBikes = await Inventory.populate(
+                filteredInventories,
+                { path: 'bike' }
+            );
+            console.log('I');
+            res.status(200).json(inventoriesWithBikes);
+        } catch (error) {
+            res.status(500).json({
+                message: `Error filtering bikes: ${error}`,
+            });
+        }
+    };
+
     // public API
     return {
         createBike,
@@ -76,6 +118,7 @@ var bikeAPI = (function () {
         deleteBike,
         findById,
         listAllBikes,
+        filterBikes,
     };
 })();
 

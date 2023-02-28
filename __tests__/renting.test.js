@@ -38,7 +38,7 @@ describe('Renting', () => {
             suspension: 'None',
             front_travel: 0,
             seatpost: 'Carbon Fiber',
-            brand_site: 'https://www.examplebrand.com/',
+            brand: 'https://www.examplebrand.com/',
         });
         const inventory = await Inventory.create({
             bike: bike._id,
@@ -79,7 +79,7 @@ describe('Renting', () => {
             suspension: 'None',
             front_travel: 0,
             seatpost: 'Carbon Fiber',
-            brand_site: 'https://www.examplebrand.com/',
+            brand: 'https://www.examplebrand.com/',
         });
         const inventory = await Inventory.create({
             bike: bike._id,
