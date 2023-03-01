@@ -12,7 +12,7 @@
         <script src="/js/showAvailable.js" defer></script>
         <script>
           function scrollToTop() {
-            const element = document.getElementById("anchor-available");
+            const element = document.getElementById("offers");
             element.scrollIntoView({block: "start"});
           }
         </script>
@@ -34,10 +34,11 @@
                         </ul>
                     </div>
                     <div>
-                        <form class="d-flex" style="gap: 1rem">
-                            <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Search" spellcheck="false" data-ms-editor="true">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                        </form>
+                        <ul class="navbar-nav">
+                          <li class="nav-item">
+                              <a class="nav-link" href="/">Log in</a>
+                          </li>
+                      </ul>
                     </div>
                 </div>
             </nav>
@@ -47,14 +48,17 @@
             <div>
               <h1 class="title">Bicis 99</h1>
               <p class="subtitle">Alquila y pedalea</p>
-              <a href="#anchor-available" class="explore" onclick="scrollToTop()">Explorar</a>
+              <a href="#offers" class="explore" onclick="scrollToTop()">Explorar</a>
             </div>
           </div>
         </div>
-        <div class="pt-5" style="height: 100vh" id="anchor-available">
-          <div class="container mt-5">
-            <label for="showAvailable" class="checkbox">Sólo disponibles</label>  
-            <input type="checkbox" name="showAvailable" id="showAvailable" checked>         
+        <div class="pt-5" style="height: 100vh" id="offers">
+          <div class="container mt-5 mb-5 d-flex" style="gap:2rem">
+            <div>
+              <label for="showAvailable" class="checkbox">Sólo disponibles</label>  
+              <input type="checkbox" name="showAvailable" id="showAvailable" checked>         
+            </div>
+            <input type="text" placeholder="Nombre">
           </div>
           <div id="bike-container">{{bikes}}</div>
         </div>

@@ -5,6 +5,9 @@ var { inventoryAPI } = require('../controllers/inventory.controller');
 // -- Get --
 // list all available inventories
 api.get('/available', inventoryAPI.listAllAvailableInventories);
+// -- RENTING --
+api.put('/rent/:id', inventoryAPI.rentBike);
+api.put('/return/:id', inventoryAPI.returnBike);
 // get inventory by id
 api.get('/:id', inventoryAPI.findById);
 // list all bikes in a store
@@ -24,8 +27,5 @@ api.put('/:id', inventoryAPI.updateInventory);
 // delete bike by id
 api.delete('/:id', inventoryAPI.deleteInventory);
 
-// -- RENTING --
-api.put('/:id/rent', inventoryAPI.rentBike);
-api.put('/:id/return', inventoryAPI.returnBike);
 
 module.exports = api;

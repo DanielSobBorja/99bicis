@@ -79,19 +79,43 @@ img {
   text-decoration: none;
   font-size: 2rem;
   color: black;
+  position: relative;
+  margin-left: 10%;
+  transition: 400ms;
 }
-.explore {
-  text-decoration: none;
-  font-size: 2rem;
+.explore:hover {
   color: black;
+  transform: translateY(-20%);
 }
-
+.explore:after {
+  content: "•";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scale(1.3);
+  top: 100%;
+  transform-origin: center center;
+  transition: transform 200ms ease-in-out;
+}
+.explore:hover:after {
+  transform: translateY(100%) scale(3) translateX(-20%);
+}
+.explore:before {
+  content: "-";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+  transform-origin: center center;
+  transition: transform 200ms ease-in-out;
+}
+.explore:hover:before {
+  transform: scaleY(1.5) scaleX(13) translateX(-4%) translateY(-30%);
+}
 .card-subtitle {
   margin-left: .1rem;
 }
 .card-subtitle:before, .card-subtitle:after {
   content: "•";
-
 }
 
 body {

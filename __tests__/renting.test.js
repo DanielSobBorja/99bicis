@@ -50,7 +50,7 @@ describe('Renting', () => {
         });
 
         const res = await request(app)
-            .put(`/inventory/${inventory._id}/rent`)
+            .put(`/inventory/rent/${inventory._id}`)
             .send({ quantity: 2 });
 
         expect(res.statusCode).toBe(200);
@@ -90,7 +90,7 @@ describe('Renting', () => {
             rentedStock: 8,
         });
         const res = await request(app)
-            .put(`/inventory/${inventory._id}/return`)
+            .put(`/inventory/return/${inventory._id}`)
             .send({ quantity: 2 });
 
         expect(res.statusCode).toBe(200);

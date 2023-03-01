@@ -94,8 +94,8 @@ I have setup three different routers: bike, inventory and store, each with their
 
 #### Rent and return a bike
 
-`/inventory/:id/rent`
-`/inventory/:id/return`
+`/rent/inventory/:id`
+`/return/inventory/:id`
 
 ### DELETE
 

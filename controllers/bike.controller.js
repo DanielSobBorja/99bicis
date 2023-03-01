@@ -76,7 +76,6 @@ var bikeAPI = (function () {
         deleteBike,
         findById,
         listAllBikes,
-        filterBikes,
     };
 })();
 

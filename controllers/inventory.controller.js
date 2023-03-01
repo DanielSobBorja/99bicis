@@ -111,13 +111,16 @@ var inventoryAPI = (function () {
                 ...inventory,
             });
         } catch (error) {
-            res.status(500).json({ message: 'Could not rent bike' });
+            res.status(500).json({
+                message: `Could not return bike: ${error}`,
+            });
         }
     };
 
     const returnBike = async function (req, res) {
         const inventoryId = req.params.id;
         const { quantity } = req.body;
+
         try {
             const inventory = await Inventory.findById(inventoryId);
             if (!inventory) {
@@ -135,7 +138,7 @@ var inventoryAPI = (function () {
                 ...inventory,
             });
         } catch (error) {
-            res.status(500).send({
+            res.status(500).json({
                 message: `Could not return bike: ${error}`,
             });
         }

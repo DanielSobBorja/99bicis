@@ -16,7 +16,6 @@ api.post('/create', bikeAPI.createBike);
 // update bike by id
 api.put('/:id', bikeAPI.updateBike);
 // filter bikes
-//api.put('/bike', bikeAPI.filterBikes);
 
 // -- Delete --
 // delete bike by id
