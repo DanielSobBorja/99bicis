@@ -3,12 +3,14 @@ var api = express.Router();
 var { inventoryAPI } = require('../controllers/inventory.controller');
 
 // -- Get --
+// list all available inventories
+api.get('/available', inventoryAPI.listAllAvailableInventories);
+// get inventory by id
+api.get('/:id', inventoryAPI.findById);
 // list all bikes in a store
 api.get('/store/:id', inventoryAPI.listAllBikesInStore);
 // list all stores containing a bike
 api.get('/bike/:id', inventoryAPI.listAllStoresContainingBike);
-// list all available inventories
-api.get('/available', inventoryAPI.listAllAvailableInventories);
 
 // -- Post --
 // create inventory by store id and bike id, optional stock

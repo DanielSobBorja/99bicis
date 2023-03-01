@@ -71,12 +71,17 @@ var inventoryAPI = (function () {
 
     const listAllAvailableInventories = async (req, res) => {
         try {
-            let inventories = await Inventory.find({
-                rentableStock: { $gt: 0 },
-            })
+            let filtro = {
+                $expr: {
+                    $gt: [{ $subtract: ['$rentableStock', '$rentedStock'] }, 0]
+                }
+            };
+            if (req.query.available == 'n') {
+                filtro = {};
+            }
+            let inventories = await Inventory.find(filtro)
                 .populate('bike')
                 .populate('store');
-
             res.status(200).json(inventories);
         } catch (error) {
             res.status(500).send({
@@ -166,6 +171,21 @@ var inventoryAPI = (function () {
         }
     };
 
+    const findById = async (req, res) => {
+        let { id } = req.params;
+
+        try {
+            let foundInventory = await Inventory.findById(id).populate('bike').populate('store');
+            if (!foundInventory) {
+                res.status(404).send({ message: 'Inventory not found' });
+            } else {
+                res.status(200).json(foundInventory);
+            }
+        } catch (error) {
+            res.status(500).send({ message: `Error finding inventory: ${error}` });
+        }
+    };
+
     // public API
     return {
         createInventory,
@@ -176,6 +196,7 @@ var inventoryAPI = (function () {
         listAllBikesInStore,
         listAllStoresContainingBike,
         listAllAvailableInventories,
+        findById,
     };
 })();
 

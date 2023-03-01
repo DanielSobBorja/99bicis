@@ -1,0 +1,110 @@
+
+#bike-container {
+    display: flex;
+    height: min-container;
+    padding: 2rem 0;
+    flex-grow: 1;
+    gap: 2rem;
+    overflow-x: scroll;
+}
+
+#bike-container > div {
+  min-width: 350px;
+  margin-left: 1rem;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#bike-container::-webkit-scrollbar {
+display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#bike-container {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+.card {
+  border: none;
+  box-shadow: 0 10px 20px rgba(0,0,0,.1);
+}
+
+img {
+  object-fit: cover;
+}
+
+.cover-container {
+  height: 100vh;
+  background-image: url('/img/background.jpg');
+  background-position: bottom left;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: max(130vw, 160vh);
+}
+
+.card-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 350px;
+  height: 664px;
+  gap: 2rem;
+}
+
+.card-loading p {
+  font-size: 20px;
+  color: gray;
+}
+
+.card-loading img {
+  width: 150px;
+  height: 150px;
+}
+
+.title {
+  font-size: max(6vw, 100px);
+  transform: translateY(-20vh);
+  transition: 1s;
+}
+
+.subtitle {
+  font-size: max(2vw, 40px);
+  transform: translateY(-20vh);
+  transition: 1s;
+  color: gray;
+}
+
+.explore {
+  text-decoration: none;
+  font-size: 2rem;
+  color: black;
+}
+.explore {
+  text-decoration: none;
+  font-size: 2rem;
+  color: black;
+}
+
+.card-subtitle {
+  margin-left: .1rem;
+}
+.card-subtitle:before, .card-subtitle:after {
+  content: "•";
+
+}
+
+body {
+  scroll-behaviour: smooth;
+}
+
+.checkbox {
+  font-size: 20px;
+}
+.checkbox:hover {
+  text-decoration: underline;
+}
+.checkbox input {
+  height: 20px;
+  width: 10px;
+}

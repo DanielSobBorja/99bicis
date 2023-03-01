@@ -4,7 +4,7 @@
     "description": "aggregator using express",
     "main": "index.js",
     "scripts": {
-        "start": "cross-env NODE_ENV=production node ./bin/www",
+        "start": "cross-env NODE_ENV=production nodemon ./bin/www",
         "devstart": "cross-env NODE_ENV=development nodemon ./bin/www",
         "serverstart": "cross-env NODE_ENV=development npm run devstart",
         "migrate": "node ./db/migrate.js",
